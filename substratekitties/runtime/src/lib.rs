@@ -54,6 +54,8 @@ pub type BlockNumber = u64;
 /// Index of an account's extrinsic in the chain.
 pub type Nonce = u64;
 
+mod substratekitties;
+
 /// Used for the module template in `./template.rs`
 mod template;
 
@@ -91,8 +93,8 @@ pub mod opaque {
 
 /// This runtime version.
 pub const VERSION: RuntimeVersion = RuntimeVersion {
-	spec_name: create_runtime_str!("node-template"),
-	impl_name: create_runtime_str!("node-template"),
+	spec_name: create_runtime_str!("substratekitties"),
+	impl_name: create_runtime_str!("substratekitties"),
 	authoring_version: 3,
 	spec_version: 4,
 	impl_version: 4,
@@ -186,6 +188,8 @@ impl sudo::Trait for Runtime {
 	type Proposal = Call;
 }
 
+impl substratekitties::Trait for Runtime{}
+
 /// Used for the module template in `./template.rs`
 impl template::Trait for Runtime {
 	type Event = Event;
@@ -213,6 +217,7 @@ construct_runtime!(
 		TemplateModule: template::{Module, Call, Storage, Event<T>},
 		ExampleModule: substrate_module_template::{Module, Call, Storage, Event<T>},
 
+		Substratekitties: substratekitties::{Module, Call, Storage},
 	}
 );
 
